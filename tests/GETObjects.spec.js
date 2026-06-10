@@ -11,7 +11,6 @@ test("Get API ", async ({ request }) => {
 
   console.log(body);
   console.log(ResponseStatus);
-
   console.log(body.id);
   console.log(body.name);
   console.log(body.data);
@@ -20,4 +19,5 @@ test("Get API ", async ({ request }) => {
   expect(body.name).toBe("Google Pixel 6 Pro");
   expect(ResponseStatus).toBe(200); // Check API Reposnse
   expect(ResponseText).toBe("OK"); // Check API Reposnse Text
+  expect(body).not.toBeNull(); // Check Repsone Body is NOT NULL
 });
