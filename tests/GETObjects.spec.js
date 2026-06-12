@@ -3,7 +3,7 @@
 
 import { test, expect } from "@playwright/test";
 
-test.skip("Get API ", async ({ request }) => {
+test("Get API ", async ({ request }) => {
   const response = await request.get("https://api.restful-api.dev/objects/1");
   const body = await response.json();
   const ResponseStatus = response.status();
@@ -24,7 +24,7 @@ test.skip("Get API ", async ({ request }) => {
 
 test("POST API ", async ({ request }) => {
   const payload = {
-    name: "Apple MacBook Pro 16",
+    name: "Apple MacBook Pro 16(New)",
     data: {
       year: 2019,
       price: 1849.99,
@@ -41,8 +41,11 @@ test("POST API ", async ({ request }) => {
 
   const Reqbody = await response.json();
   console.log(Reqbody);
+  const NewID = Reqbody.id;
 
-  const GETResponse = request.get(
-    "https://api.restful-api.dev/objects/ff8081819d82fab6019eb6da5b887255"
+  const GETResponse = await request.get(
+    `https://api.restful-api.dev/objects/${NewID}`
   );
+  const Getbody = await GETResponse.json();
+  console.log(Getbody);
 });
