@@ -22,7 +22,7 @@ test("Get API ", async ({ request }) => {
   expect(body).not.toBeNull(); // Check Repsone Body is NOT
 });
 
-test("POST API ", async ({ request }) => {
+test("POST and GET CHAINING ", async ({ request }) => {
   const payload = {
     name: "Apple MacBook Pro 16(New)",
     data: {
@@ -48,4 +48,50 @@ test("POST API ", async ({ request }) => {
   );
   const Getbody = await GETResponse.json();
   console.log(Getbody);
+});
+
+test("POST and PUT CHAINING ", async ({ request }) => {
+  const payload = {
+    name: "Apple MacBook Pro 16(New)",
+    data: {
+      year: 2019,
+      price: 1849.99,
+      "CPU model": "Intel Core i9",
+      "Hard disk size": "1 TB",
+    },
+  };
+
+  const Newpayload = {
+    name: "Apple MacBook Pro 16(Updated)",
+    data: {
+      year: 2019,
+      price: 1849.99,
+      "CPU model": "Intel Core i9",
+      "Hard disk size": "1 TB",
+    },
+  };
+
+  const endpoint = "https://api.restful-api.dev/objects";
+  const response = await request.post(endpoint, {
+    headers: { "Content-Type": "application/json" },
+    data: payload,
+  });
+
+  const Reqbody = await response.json();
+  console.log("------------------");
+  console.log(Reqbody);
+  console.log("------------------");
+
+  const NewID = Reqbody.id;
+
+  const PUTendpoint = `https://api.restful-api.dev/objects/${NewID}`;
+  const PUTresponse = await request.put(PUTendpoint, {
+    headers: { "Content-Type": "application/json" },
+    data: Newpayload,
+  });
+
+  const PUTbody = await PUTresponse.json();
+  console.log("------------------");
+  console.log(PUTbody);
+  console.log("------------------");
 });
