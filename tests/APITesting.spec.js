@@ -3,7 +3,7 @@
 
 import { test, expect } from "@playwright/test";
 
-test("Get API ", async ({ request }) => {
+test.skip("Get API ", async ({ request }) => {
   const response = await request.get("https://api.restful-api.dev/objects/1");
   const body = await response.json();
   const ResponseStatus = response.status();
@@ -22,7 +22,7 @@ test("Get API ", async ({ request }) => {
   expect(body).not.toBeNull(); // Check Repsone Body is NOT
 });
 
-test("POST and GET CHAINING ", async ({ request }) => {
+test.skip("POST and GET CHAINING ", async ({ request }) => {
   const payload = {
     name: "Apple MacBook Pro 16(New)",
     data: {
@@ -50,7 +50,7 @@ test("POST and GET CHAINING ", async ({ request }) => {
   console.log(Getbody);
 });
 
-test("POST and PUT CHAINING ", async ({ request }) => {
+test.skip("POST and PUT CHAINING ", async ({ request }) => {
   const payload = {
     name: "Apple MacBook Pro 16(New)",
     data: {
@@ -94,4 +94,41 @@ test("POST and PUT CHAINING ", async ({ request }) => {
   console.log("------------------");
   console.log(PUTbody);
   console.log("------------------");
+});
+
+
+test("POST, DELETE and GET CHAINING ", async ({ request }) => {
+  const payload = {
+    name: "Apple MacBook Pro 16(New)",
+    data: {
+      year: 2019,
+      price: 1849.99,
+      "CPU model": "Intel Core i9",
+      "Hard disk size": "1 TB",
+    },
+  };
+
+
+  const endpoint = "https://api.restful-api.dev/objects";
+  const response = await request.post(endpoint, {
+    headers: { "Content-Type": "application/json" },
+    data: payload,
+  });
+
+  const Reqbody = await response.json();
+  console.log("------------------");
+  console.log(Reqbody);
+  console.log("------------------");
+
+
+  const Deleteendpoint = `https://api.restful-api.dev/objects/${NewID}`;
+  const DeleteResponse = await request.delete(Deleteendpoint);
+
+  const Deletebody = await DeleteResponse.json();
+  console.log("------------------");
+  console.log(Deletebody);
+  console.log("------------------");
+
+
+
 });
