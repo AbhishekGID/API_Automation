@@ -96,8 +96,7 @@ test.skip("POST and PUT CHAINING ", async ({ request }) => {
   console.log("------------------");
 });
 
-
-test("POST, DELETE and GET CHAINING ", async ({ request }) => {
+test.skip("POST, DELETE CHAINING", async ({ request }) => {
   const payload = {
     name: "Apple MacBook Pro 16(New)",
     data: {
@@ -119,6 +118,7 @@ test("POST, DELETE and GET CHAINING ", async ({ request }) => {
   console.log("------------------");
   console.log(Reqbody);
   console.log("------------------");
+  const NewID = Reqbody.id;
 
 
   const Deleteendpoint = `https://api.restful-api.dev/objects/${NewID}`;
@@ -127,6 +127,49 @@ test("POST, DELETE and GET CHAINING ", async ({ request }) => {
   const Deletebody = await DeleteResponse.json();
   console.log("------------------");
   console.log(Deletebody);
+  console.log("------------------");
+
+
+
+});
+
+test("POST, PATCH CHAINING ", async ({ request }) => {
+  const payload = {
+    name: "Apple MacBook Pro 16(New)",
+    data: {
+      year: 2019,
+      price: 1849.99,
+      "CPU model": "Intel Core i9",
+      "Hard disk size": "1 TB",
+    },
+  };
+
+
+  const endpoint = "https://api.restful-api.dev/objects";
+  const response = await request.post(endpoint, {
+    headers: { "Content-Type": "application/json" },
+    data: payload,
+  });
+
+  const Reqbody = await response.json();
+  console.log("------------------");
+  console.log(Reqbody);
+  const NewID = Reqbody.id;
+  console.log(NewID)
+  console.log("------------------");
+
+
+  const PatchEndPoint = `https://api.restful-api.dev/objects/${NewID}`;
+  const PatchResponse = await request.patch(PatchEndPoint, {
+    headers: { "Content-Type": "application/json" },
+    data: {
+      "name": "Apple MacBook Pro 16 (Updated Name)"
+    },
+  });
+
+  const Patchbody = await PatchResponse.json();
+  console.log("------------------");
+  console.log(Patchbody);
   console.log("------------------");
 
 
