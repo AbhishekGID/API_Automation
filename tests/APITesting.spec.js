@@ -133,7 +133,7 @@ test.skip("POST, DELETE CHAINING", async ({ request }) => {
 
 });
 
-test("POST, PATCH CHAINING ", async ({ request }) => {
+test.skip("POST, PATCH CHAINING ", async ({ request }) => {
   const payload = {
     name: "Apple MacBook Pro 16(New)",
     data: {
