@@ -1,6 +1,4 @@
 import { test, expect } from "@playwright/test";
-
-
 const bookReqBody = require('../test-Data/post_request_body.json')
 
 //  Using  https://restful-booker.herokuapp.com
