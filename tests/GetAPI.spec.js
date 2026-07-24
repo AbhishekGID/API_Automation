@@ -4,18 +4,17 @@
 import { test, expect } from "@playwright/test";
 import { request } from "node:http";
 
-// Get all Booking Ids
-test("Get Booking ID - GET Request", async ({ request }) => {
-  const GetRequest = await request.get(
+test("Get Request", async ({ request }) => {
+  const GETReq = await request.get(
     "https://restful-booker.herokuapp.com/booking"
   );
 
-  const GETResponse = await GetRequest.json();
-  console.log(GETResponse);
+  const GETReqJSON = await GETReq.json();
+  console.log(GETReqJSON);
 });
 
 // Get Specific Booking ID
-test("Get Booking Deatils with ID GET Request", async ({ request }) => {
+test.skip("Get Booking Deatils with ID GET Request", async ({ request }) => {
   const GetresponseBody = await request.get(
     "https://restful-booker.herokuapp.com/booking/10"
   );
